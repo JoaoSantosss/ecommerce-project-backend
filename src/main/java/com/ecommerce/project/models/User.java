@@ -2,11 +2,14 @@ package com.ecommerce.project.models;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +34,9 @@ public class User implements Serializable{
 	private String cnpj;
 	private String legaName;
 	private String cpf;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Address> address;
 	
 	public User(Long id, String password, String name, String cpf) {
 		super();
