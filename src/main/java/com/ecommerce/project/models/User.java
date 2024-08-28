@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Table(name = "tb_user")
 @AllArgsConstructor
@@ -37,6 +38,9 @@ public class User implements Serializable{
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Address> address;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Order> orders;
 	
 	public User(Long id, String password, String name, String cpf) {
 		super();
