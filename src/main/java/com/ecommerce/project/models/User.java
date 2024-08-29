@@ -1,6 +1,7 @@
 package com.ecommerce.project.models;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,6 +42,9 @@ public class User implements Serializable{
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Order> orders;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
+	private List<Product> products;
 	
 	public User(Long id, String password, String name, String cpf) {
 		super();

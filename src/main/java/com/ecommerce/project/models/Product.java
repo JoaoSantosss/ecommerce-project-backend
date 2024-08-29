@@ -1,7 +1,5 @@
 package com.ecommerce.project.models;
 
-import java.time.Instant;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,22 +13,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_order")
+@Table(name= "tb_product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Order {
-
+public class Product {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Instant date;
-	private Double totalPrice;
+	private String name;
+	private Double price;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
-	
-	
+	private User seller;
+
 }
