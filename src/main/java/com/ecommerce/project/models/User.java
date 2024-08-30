@@ -30,7 +30,7 @@ public class User implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Long id;
+	private Integer id;
 	private String password;
 	private String name;
 	private String cnpj;
@@ -46,7 +46,7 @@ public class User implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
 	private List<Product> products;
 	
-	public User(Long id, String password, String name, String cpf) {
+	public User(Integer id, String password, String name, String cpf) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -54,7 +54,7 @@ public class User implements Serializable{
 		this.cpf = cpf;
 	}
 
-	public User(Long id, String password, String name, String cnpj, String legaName) {
+	public User(Integer id, String password, String name, String cnpj, String legaName) {
 		super();
 		this.id = id;
 		this.password = password;
