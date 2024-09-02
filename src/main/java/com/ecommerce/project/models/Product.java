@@ -1,6 +1,5 @@
 package com.ecommerce.project.models;
 
-import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -14,6 +13,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,10 +24,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Integer id;
 	private String name;
 	private Double price;
@@ -44,25 +46,6 @@ public class Product {
 			inverseJoinColumns = @JoinColumn(name="category_id"))
 	private Set<Category> categories;
 
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		return Objects.equals(id, other.id);
-	}
-	
 	
 
 }

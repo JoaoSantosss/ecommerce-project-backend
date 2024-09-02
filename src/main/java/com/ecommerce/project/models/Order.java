@@ -1,5 +1,6 @@
 package com.ecommerce.project.models;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 import jakarta.persistence.Entity;
@@ -10,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,10 +22,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Order {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Order implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Integer id;
 	private Instant date;
 	private Double totalPrice;
