@@ -3,6 +3,8 @@ package com.ecommerce.project.models;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.ecommerce.project.models.enums.OrderStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +34,7 @@ public class Order implements Serializable{
 	private Integer id;
 	private Instant date;
 	private Double totalPrice;
+	private OrderStatus status;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
