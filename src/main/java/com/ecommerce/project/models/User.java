@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import com.ecommerce.project.models.enums.Role;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -38,6 +40,7 @@ public class User implements Serializable{
 	private String cnpj;
 	private String legaName;
 	private String cpf;
+	private Role role;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Address> address;
