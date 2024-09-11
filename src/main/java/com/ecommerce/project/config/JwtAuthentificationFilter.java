@@ -24,6 +24,10 @@ public class JwtAuthentificationFilter extends OncePerRequestFilter{
 		//check if JWT token exists  
 		final String authHeader = request.getHeader("Authorization");
 		final String jwtToken;
+		
+		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+			
+		}
 	}
 
 }
