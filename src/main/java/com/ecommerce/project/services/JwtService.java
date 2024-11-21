@@ -1,4 +1,4 @@
-package com.ecommerce.project.config;
+package com.ecommerce.project.services;
 
 import java.security.Key;
 import java.util.Date;
