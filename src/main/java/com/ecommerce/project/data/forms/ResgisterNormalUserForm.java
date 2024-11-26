@@ -1,4 +1,4 @@
-package com.ecommerce.project.models.forms;
+package com.ecommerce.project.data.forms;
 
 import com.ecommerce.project.models.enums.Role;
 
@@ -11,14 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResgisterForm {
+public class ResgisterNormalUserForm {
 	
 	private String email;
 	private String password;
 	private String name;
 	private String cpf;
 	private Role role;
-
-
 
 }

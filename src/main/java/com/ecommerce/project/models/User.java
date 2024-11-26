@@ -1,15 +1,19 @@
 package com.ecommerce.project.models;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.ecommerce.project.models.enums.Role;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,19 +25,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
+@Data
 @Entity
 @Builder
 @Table(name = "tb_user")
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User implements UserDetails{
 	
@@ -43,14 +44,18 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
 	private Integer id;
+	@Column(nullable = false, unique = true)
 	private String email;
+	@Column(nullable = false)
 	private String password;
+	@Column(nullable = false)
 	private String name;
-	private String cnpj;
-	private String legaName;
+	@Column(nullable = false)
 	private String cpf;
 	
+	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private Role role;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -62,22 +67,24 @@ public class User implements UserDetails{
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
 	private List<Product> products;
 	
-	public User(Integer id, String password, String name, String cpf) {
+	
+    @CreationTimestamp
+	@Column(nullable = false, updatable = false)
+	private Date createdAt;
+    
+    @UpdateTimestamp
+    private Date updatedAt;
+	
+	public User(Integer id, String password, String name, String cpf, Role role) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.cpf = cpf;
+		this.role = role;
+		this.createdAt = new Date();
 	}
 
-	public User(Integer id, String password, String name, String cnpj, String legaName) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.cnpj = cnpj;
-		this.legaName = legaName;
-	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

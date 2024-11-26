@@ -1,4 +1,4 @@
-package com.ecommerce.project.controllers.auth;
+package com.ecommerce.project.data.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-	
-	private String token;
+public class AuthenticateForm {
 
+	private String email;
+	private String password;
+	
 }
