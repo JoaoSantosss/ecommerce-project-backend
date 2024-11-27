@@ -52,6 +52,9 @@ public class User implements UserDetails{
 	private String name;
 	@Column(nullable = false)
 	private String cpf;
+	@Column(nullable = false)
+	private Boolean active;
+	
 	
 	
 	@Enumerated(EnumType.STRING)
@@ -82,6 +85,16 @@ public class User implements UserDetails{
 		this.name = name;
 		this.cpf = cpf;
 		this.role = role;
+		this.createdAt = new Date();
+	};
+	
+	public User(Integer id, String password, String name, String cpf) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.cpf = cpf;
+		this.role = Role.USER;
 		this.createdAt = new Date();
 	}
 

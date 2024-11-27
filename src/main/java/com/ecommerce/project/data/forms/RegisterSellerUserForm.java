@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterCompanyUserForm {
+public class RegisterSellerUserForm {
 	
 	private String email;
 	private String password;
