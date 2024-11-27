@@ -27,10 +27,12 @@ public class SecurityConfiguration {
 		
 		http
 			.csrf(AbstractHttpConfigurer::disable)
+			.headers(headers -> headers.frameOptions().disable())
 			.authorizeHttpRequests(req -> 
 			req.requestMatchers("/auth").permitAll()
 			.requestMatchers(HttpMethod.POST, "/user").permitAll()
-			.requestMatchers("/h2-console/**").permitAll()
+			.requestMatchers("/h2-console","/h2-console/**").permitAll()
+			.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()			
 			.anyRequest().authenticated()
 			)
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
