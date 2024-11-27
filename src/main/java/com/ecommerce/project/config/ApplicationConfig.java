@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.ecommerce.project.repositories.UserRepository;
 
@@ -46,5 +49,18 @@ public class ApplicationConfig {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	 @Bean
+	    public CorsFilter corsFilter() {
+	        CorsConfiguration corsConfiguration = new CorsConfiguration();
+	        corsConfiguration.addAllowedOrigin("http://localhost:8081"); 
+	        corsConfiguration.addAllowedMethod("*"); 
+	        corsConfiguration.addAllowedHeader("*"); 
+	        corsConfiguration.setAllowCredentials(true); 
+
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", corsConfiguration); 
+	        return new CorsFilter(source);
+	    }
 
 }
