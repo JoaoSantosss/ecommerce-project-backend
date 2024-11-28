@@ -58,7 +58,7 @@ public class User implements UserDetails{
 	
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(name="role" ,nullable = false)
 	private Role role;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -77,26 +77,6 @@ public class User implements UserDetails{
     
     @UpdateTimestamp
     private Date updatedAt;
-	
-	public User(Integer id, String password, String name, String cpf, Role role) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.cpf = cpf;
-		this.role = role;
-		this.createdAt = new Date();
-	};
-	
-	public User(Integer id, String password, String name, String cpf) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.cpf = cpf;
-		this.role = Role.USER;
-		this.createdAt = new Date();
-	}
 
 
 	@Override

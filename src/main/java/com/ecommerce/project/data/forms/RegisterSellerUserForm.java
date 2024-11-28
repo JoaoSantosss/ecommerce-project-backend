@@ -1,7 +1,5 @@
 package com.ecommerce.project.data.forms;
 
-import com.ecommerce.project.models.enums.Role;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +17,5 @@ public class RegisterSellerUserForm {
 	private String cnpj;
 	private String legalName;
 	private String cpf;
-	private Role role;
 
 }

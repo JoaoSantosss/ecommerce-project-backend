@@ -11,6 +11,7 @@ import com.ecommerce.project.data.forms.ResgisterNormalUserForm;
 import com.ecommerce.project.models.SellerUser;
 import com.ecommerce.project.models.User;
 import com.ecommerce.project.models.enums.Role;
+import com.ecommerce.project.repositories.SellerUserRepository;
 import com.ecommerce.project.repositories.UserRepository;
 
 @Service
@@ -18,6 +19,9 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private SellerUserRepository sellerUserRepository;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -39,16 +43,24 @@ public class UserService {
 
 	public SellerUserDTO registerSeller(RegisterSellerUserForm form) {
 		
-		SellerUser sellerUser = new SellerUser();
-		sellerUser.setActive(true);
-		sellerUser.setName(form.getName());
-		sellerUser.setEmail(form.getEmail());
-		sellerUser.setCpf(form.getCpf());
-		sellerUser.setCnpj(form.getCnpj());
-		sellerUser.setPassword(passwordEncoder.encode(form.getPassword()));
-		sellerUser.setLegalName(form.getLegalName());
+		User user = User.builder()
+				.active(true)
+				.email(form.getEmail())
+				.name(form.getName())
+				.password(passwordEncoder.encode(form.getPassword()))
+				.cpf(form.getCpf())
+				.role(Role.SELLER)
+				.build();
 		
-		userRepository.save(sellerUser);
+		SellerUser sellerUser = SellerUser.builder()
+				.user(user)
+				.cnpj(form.getCnpj())
+				.legalName(form.getLegalName())
+				.build();
+		
+		userRepository.save(user);
+		sellerUserRepository.save(sellerUser);
+		
 		
 		return new SellerUserDTO(sellerUser);
 	}

@@ -21,9 +21,9 @@ public class SellerUserDTO {
 	public SellerUserDTO(SellerUser sellerUser) {
 		super();
 		this.id = sellerUser.getId();
-		this.email = sellerUser.getEmail();
-		this.name = sellerUser.getName();
-		this.cpf = sellerUser.getCpf();
+		this.email = sellerUser.getUser().getEmail();
+		this.name = sellerUser.getUser().getName();
+		this.cpf = sellerUser.getUser().getCpf();
 		this.cnpj = sellerUser.getCnpj();
 		this.legalName = sellerUser.getLegalName();
 	} 
