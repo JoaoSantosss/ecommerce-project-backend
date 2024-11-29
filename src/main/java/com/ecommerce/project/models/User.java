@@ -62,13 +62,17 @@ public class User implements UserDetails{
 	private Role role;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<Address> address;
+	private Set<Address> addresses;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<Order> orders;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seller")
 	private List<Product> products;
+	
+	public void addAddress(Address address) {
+		addresses.add(address);
+	}
 	
 	
     @CreationTimestamp

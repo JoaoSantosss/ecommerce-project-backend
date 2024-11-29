@@ -2,13 +2,11 @@ package com.ecommerce.project.data.dto;
 
 import com.ecommerce.project.models.SellerUser;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class SellerUserDTO {
 
 	private Integer id;
