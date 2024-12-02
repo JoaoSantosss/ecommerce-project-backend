@@ -18,6 +18,9 @@ import com.ecommerce.project.repositories.UserRepository;
 public class UserService {
 	
 	@Autowired
+	private JwtService jwtService;
+	
+	@Autowired
 	private UserRepository userRepository;
 	
 	@Autowired
@@ -63,6 +66,15 @@ public class UserService {
 		
 		
 		return new SellerUserDTO(sellerUser);
+	}
+
+	public void changePassword(String token, String newPassword) {
+		
+		String userName = jwtService.extractUsername(token);
+		User user = userRepository.findByEmail(userName).get();
+		user.setPassword(passwordEncoder.encode(newPassword));
+		
+		userRepository.save(user);
 	}
 
 }
