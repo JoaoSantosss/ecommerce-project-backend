@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.project.data.AuthenticationResponse;
+import com.ecommerce.project.data.dto.NormalUserDTO;
 import com.ecommerce.project.data.forms.AuthenticateForm;
 import com.ecommerce.project.models.User;
 import com.ecommerce.project.repositories.UserRepository;
@@ -37,7 +38,10 @@ public class AuthenticationService {
 					);
 			User user = userRepository.findByEmail(form.getEmail()).orElseThrow();
 			String jwtToken = jwtService.generateToken(user);
-			return AuthenticationResponse.builder().token(jwtToken).build();
+			return AuthenticationResponse.builder()
+					.token(jwtToken)
+					.userDto(new NormalUserDTO(user))
+					.build();
 		
 		
 	}
