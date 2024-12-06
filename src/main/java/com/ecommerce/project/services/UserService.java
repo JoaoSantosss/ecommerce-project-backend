@@ -1,6 +1,9 @@
 package com.ecommerce.project.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +11,7 @@ import com.ecommerce.project.data.dto.NormalUserDTO;
 import com.ecommerce.project.data.dto.SellerUserDTO;
 import com.ecommerce.project.data.forms.RegisterSellerUserForm;
 import com.ecommerce.project.data.forms.ResgisterNormalUserForm;
+import com.ecommerce.project.events.GenericEmailEvent;
 import com.ecommerce.project.models.SellerUser;
 import com.ecommerce.project.models.User;
 import com.ecommerce.project.models.enums.Role;
@@ -28,6 +32,10 @@ public class UserService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private ApplicationContext applicationContext;
+
 	
 	public NormalUserDTO registerUser(ResgisterNormalUserForm form) {
 		User user = User.builder()
@@ -75,6 +83,15 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(newPassword));
 		
 		userRepository.save(user);
+	}
+
+	public void forgotPassword(String email) {
+		Optional<User> user = userRepository.findByEmail(email);
+		
+		if (user.isPresent()) {
+			applicationContext.publishEvent(new GenericEmailEvent(user, email, email, email, null));
+		}
+		
 	}
 
 }

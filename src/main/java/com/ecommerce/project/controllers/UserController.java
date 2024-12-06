@@ -38,7 +38,7 @@ public class UserController {
 		return ResponseEntity.created(uri).body(user);
 	}
 	
-	@PostMapping("seller")
+	@PostMapping("/seller")
 	public ResponseEntity<SellerUserDTO> registerSeller(@RequestBody RegisterSellerUserForm form){
 		
 		SellerUserDTO user = userService.registerSeller(form); 
@@ -56,6 +56,11 @@ public class UserController {
 		
 		userService.changePassword(token, newPassword);
 		return ResponseEntity.ok("Password changed");
+	}
+	
+	@PostMapping("/forgot-password")
+	public ResponseEntity<?> forgotPassword(String email) { 
+		userService.forgotPassword(email);
 	}
 
 }
