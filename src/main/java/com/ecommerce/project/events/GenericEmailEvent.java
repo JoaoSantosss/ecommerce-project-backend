@@ -1,7 +1,5 @@
 package com.ecommerce.project.events;
 
-import java.util.List;
-
 import org.springframework.context.ApplicationEvent;
 
 import lombok.Getter;
@@ -22,12 +20,12 @@ public class GenericEmailEvent extends ApplicationEvent{
 		super(source);
 	}
 
-	public GenericEmailEvent(Object source, String email, String assunto,
-			List<String> paragrafos) {
+	public GenericEmailEvent(Object source, String email, String subject,
+			String paragraph) {
 		super(source);
 		this.email = email;
-		this.subject = assunto;
-		this.paragraph = paragrafos;
+		this.subject = subject;
+		this.paragraph = paragraph;
 	}
 
 

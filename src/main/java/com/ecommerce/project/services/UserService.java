@@ -3,7 +3,8 @@ package com.ecommerce.project.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ import com.ecommerce.project.repositories.UserRepository;
 @Service
 public class UserService {
 	
+	@Value("${application.frontendurl}")
+	private String frontendURL;
+	
 	@Autowired
 	private JwtService jwtService;
 	
@@ -34,7 +38,9 @@ public class UserService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private ApplicationContext applicationContext;
+	private ApplicationEventPublisher publisher;
+	
+	
 
 	
 	public NormalUserDTO registerUser(ResgisterNormalUserForm form) {
@@ -89,7 +95,14 @@ public class UserService {
 		Optional<User> user = userRepository.findByEmail(email);
 		
 		if (user.isPresent()) {
-			applicationContext.publishEvent(new GenericEmailEvent(user, email, email, email, null));
+			
+			String token = jwtService.generateToken(user.get());
+			String subject = "Recuperar Senha";
+			String paragraph = String.format("Clique aqui para recuperar a sua senha: %s/?token=%s",frontendURL, token );
+			
+			
+			publisher.publishEvent(new GenericEmailEvent(this, email, subject, paragraph));
+			
 		}
 		
 	}

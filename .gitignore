@@ -23,3 +23,12 @@
 hs_err_pid*
 replay_pid*
 /target/
+
+
+.DS_Store 
+src/.DS_Store
+src/main/.DS_Store
+src/test/.DS_Store
+src/test/java/.DS_Store
+src/test/java/com/.DS_Store
+src/test/java/com/ecommerce/.DS_Store

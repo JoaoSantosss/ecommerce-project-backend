@@ -53,7 +53,7 @@ public class ApplicationConfig {
 	 @Bean
 	    public CorsFilter corsFilter() {
 	        CorsConfiguration corsConfiguration = new CorsConfiguration();
-	        corsConfiguration.addAllowedOrigin("http://localhost:8081/"); 
+	        corsConfiguration.addAllowedOrigin("http://localhost:8081"); 
 	        corsConfiguration.addAllowedMethod("*"); 
 	        corsConfiguration.addAllowedHeader("*"); 
 	        corsConfiguration.setAllowCredentials(true); 

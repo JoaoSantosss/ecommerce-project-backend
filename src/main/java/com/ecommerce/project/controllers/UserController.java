@@ -61,6 +61,7 @@ public class UserController {
 	@PostMapping("/forgot-password")
 	public ResponseEntity<?> forgotPassword(String email) { 
 		userService.forgotPassword(email);
+		return ResponseEntity.ok("Verifique seu email");
 	}
 
 }
