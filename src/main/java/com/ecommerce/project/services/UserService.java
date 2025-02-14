@@ -48,6 +48,7 @@ public class UserService {
 				.active(true)
 				.name(form.getName())
 				.email(form.getEmail())
+				.phoneNumber(form.getPhoneNumber())
 				.cpf(form.getCpf())
 				.password(passwordEncoder.encode(form.getPassword()))
 				.role(Role.USER)
@@ -65,6 +66,7 @@ public class UserService {
 				.email(form.getEmail())
 				.name(form.getName())
 				.password(passwordEncoder.encode(form.getPassword()))
+				.phoneNumber(form.getPhoneNumber())
 				.cpf(form.getCpf())
 				.role(Role.SELLER)
 				.build();

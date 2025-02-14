@@ -15,5 +15,6 @@ public class ResgisterNormalUserForm {
 	private String password;
 	private String name;
 	private String cpf;
+	private String phoneNumber;
 
 }

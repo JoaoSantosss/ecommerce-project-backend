@@ -14,6 +14,7 @@ public class RegisterSellerUserForm {
 	private String email;
 	private String password;
 	private String name;
+	private String phoneNumber;
 	private String cnpj;
 	private String legalName;
 	private String cpf;

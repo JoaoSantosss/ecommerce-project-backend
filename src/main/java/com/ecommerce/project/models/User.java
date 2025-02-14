@@ -51,6 +51,8 @@ public class User implements UserDetails{
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
+	private String phoneNumber;
+	@Column(nullable = false)
 	private String cpf;
 	@Column(nullable = false)
 	private Boolean active;
